@@ -1,7 +1,6 @@
 package servers
 
 import (
-	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/msolimans/icho/icho"
@@ -12,11 +11,7 @@ import (
 	"strings"
 )
 
-var (
-	echoEndpoint = flag.String("echo_endpoint", ":9999", "endpoint of YourService")
-)
-
-func StartRest(ctx context.Context) error {
+func startRest(ctx context.Context) error {
 	//add caller to context
 	md := metadata.Pairs("caller", "1")
 	ctx = metadata.NewOutgoingContext(ctx, md)
@@ -27,12 +22,12 @@ func StartRest(ctx context.Context) error {
 		runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{EmitDefaults: true}),
 	)
 
-	if err := icho.RegisterIchoServiceHandlerFromEndpoint(ctx, mux, *echoEndpoint, opts); err != nil {
+	if err := icho.RegisterIchoServiceHandlerFromEndpoint(ctx, mux, httpEndpoint, opts); err != nil {
 		return err
 	}
 
 	s := &http.Server{
-		Addr:    ":8888",
+		Addr:    httpEndpoint,
 		Handler: allowCORS(mux),
 	}
 

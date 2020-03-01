@@ -8,8 +8,8 @@ import (
 	"net"
 )
 
-func StartgRPC(ctx context.Context) error {
-	listen, err := net.Listen("tcp", ":9999")
+func startGRPC(ctx context.Context) error {
+	listen, err := net.Listen("tcp", grpcEndpoint)
 	if err != nil {
 		return err
 	}
