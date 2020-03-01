@@ -17,7 +17,7 @@ $ docker pull msolimans/icho
 $ docker run -ti --rm -p 8888:8888 -p 9999:9999 msolimans/icho
 ```  
 
-### Test in browser
+### Testing 
 
 Open you browser and point to http://localhost:8888/echo, you should see `{response: "hello world"}`
 
