@@ -9,7 +9,7 @@ consumes:
 produces:
   - application/json
 paths:
-  "":
+  "/echo":
     get:
       operationId: GetEcho
       summary: Echo request body

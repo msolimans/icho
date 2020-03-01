@@ -27,7 +27,7 @@ service IchoService {
     // Echo request
     rpc GetEcho(GetEchoRequest) returns (PostEchoResponse) {
         option (google.api.http) = {
-            get: ""
+            get: "/echo"
         };
     }
 
@@ -45,7 +45,7 @@ service IchoService {
     // Post for Echo
     rpc PostEcho(PostEchoRequest) returns (PostEchoResponse) {
         option (google.api.http) = {
-            post: ""
+            post: "/echo"
             body: "text"
         };
     }
