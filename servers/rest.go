@@ -2,9 +2,9 @@ package servers
 
 import (
 	"flag"
+	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/msolimans/icho"
-	"github.com/prometheus/common/log"
+	"github.com/msolimans/icho/icho"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -38,9 +38,9 @@ func StartRest(ctx context.Context) error {
 
 	go func() {
 		<-ctx.Done()
-		log.Info("Shutting down the http server")
+		fmt.Println("Shutting down the http server")
 		if err := s.Shutdown(context.Background()); err != nil {
-			log.Error("Failed to shutdown http server: ", err)
+			fmt.Println("Failed to shutdown http server: ", err)
 		}
 	}()
 

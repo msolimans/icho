@@ -2,13 +2,14 @@ package servers
 
 import (
 	"context"
-	"github.com/prometheus/common/log"
+	"fmt"
+	"github.com/msolimans/icho/icho"
 	"google.golang.org/grpc"
 	"net"
 )
 
 func StartgRPC(ctx context.Context) error {
-	listen, err := net.Listen("tcp", ":9090")
+	listen, err := net.Listen("tcp", ":9999")
 	if err != nil {
 		return err
 	}
@@ -18,7 +19,7 @@ func StartgRPC(ctx context.Context) error {
 
 	go func() {
 		<-ctx.Done()
-		log.Info("Shutting down gRPC service")
+		fmt.Println("Shutting down gRPC service")
 		grpcServer.GracefulStop()
 	}()
 	return grpcServer.Serve(listen)
