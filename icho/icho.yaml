@@ -1,0 +1,65 @@
+swagger: 3.0.1
+info:
+  title: Icho
+  description: API description for Icho
+  version: 1.0.0
+
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  "":
+    get:
+      operationId: GetEcho
+      summary: Echo request body
+      description: Echo request
+      parameters:
+        - in: path
+          type: string
+          required: true
+          name: text
+      responses:
+        '200':
+          description: Post for Echo
+          schema:
+            $ref: '#/definitions/PostEchoResponse'
+
+    post:
+      operationId: PostEcho
+      summary: Post for Echo
+      description: Post for Echo
+      parameters:
+        - in: body
+          required: true
+          name: text
+          type: string
+      responses:
+        '200':
+          description: Post for Echo
+          schema:
+            $ref: '#/definitions/PostEchoResponse'
+
+  "/health":
+    get:
+      operationId: GetHealth
+      summary: health
+      description: Health of service
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HealthResponse'
+
+definitions:
+  HealthResponse:
+    type: object
+    properties:
+      status:
+        type: string
+  PostEchoResponse:
+    type: object
+    properties:
+      response:
+        type: string
+

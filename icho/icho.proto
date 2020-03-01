@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package icho;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+message GetEchoRequest {
+    string text = 1;
+}
+
+message HealthResponse {
+    string status = 1;
+}
+
+message PostEchoRequest {
+    string text = 1;
+}
+
+message PostEchoResponse {
+    string response = 1;
+}
+
+service IchoService {
+    // Echo request body
+    // 
+    // Echo request
+    rpc GetEcho(GetEchoRequest) returns (PostEchoResponse) {
+        option (google.api.http) = {
+            get: ""
+        };
+    }
+
+    // health
+    // 
+    // Health of service
+    rpc GetHealth(google.protobuf.Empty) returns (HealthResponse) {
+        option (google.api.http) = {
+            get: "/health"
+        };
+    }
+
+    // Post for Echo
+    // 
+    // Post for Echo
+    rpc PostEcho(PostEchoRequest) returns (PostEchoResponse) {
+        option (google.api.http) = {
+            post: ""
+            body: "text"
+        };
+    }
+}
