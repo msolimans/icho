@@ -22,7 +22,7 @@ func startRest(ctx context.Context) error {
 		runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{EmitDefaults: true}),
 	)
 
-	if err := icho.RegisterIchoServiceHandlerFromEndpoint(ctx, mux, httpEndpoint, opts); err != nil {
+	if err := icho.RegisterIchoServiceHandlerFromEndpoint(ctx, mux, grpcEndpoint, opts); err != nil {
 		return err
 	}
 
