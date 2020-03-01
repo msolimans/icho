@@ -21,7 +21,17 @@ $ docker run -ti --rm -p 8888:8888 -p 9999:9999 msolimans/icho
 
 Open you browser and point to http://localhost:8888/echo, you should see `{response: "hello world"}`
 
-If you want to override  response you can do that through query string, e.g. http://localhost:8888/echo?text=foo
+If you want to override  response you can do that through query string, something like
+
+http://localhost:8888/echo?text=foo
+
+If you want to echo based on http `POST`, try the following:
+
+```shell script
+$ curl  --request POST --data-raw '"foo message"' \
+    http://localhost:8888/echo
+  {"response":"foo message"}
+``` 
 
 If you want to override response through environment variable
 
