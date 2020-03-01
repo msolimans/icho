@@ -44,6 +44,18 @@ $ curl http://localhost:8888/echo
 {"response":"foo response"}
 ```     
 
+If you want to override ports, you can pass `http` and `grpc` ports like below 
+```shell script
+$ docker run --rm -ti \
+-p 7777:7777 \
+-p 6666:6666  \
+msolimans/icho -http=6666 -grpc=7777
+
+Starting REST service :6666 
+Starting gRPC service :7777
+```
+ 
+ 
 If you want to try gRPC, open `proto` file under `icho` directory in any of the gRPC client tools and use port `9999`
   
 Here's gRPC Client, https://github.com/uw-labs/bloomrpc
