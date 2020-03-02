@@ -59,3 +59,62 @@ Starting gRPC service :7777
 If you want to try gRPC, open `proto` file under `icho` directory in any of the gRPC client tools and use port `9999`
   
 Here's gRPC Client, https://github.com/uw-labs/bloomrpc
+
+For kuberenetes: 
+
+Create deployment resource:
+```shell script
+$ touch icho.yml 
+$ vim icho.yml 
+```  
+
+Add the following: 
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: icho
+  name: icho
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: icho
+  template:
+    metadata:
+      labels:
+        run: icho
+    spec:
+      containers:
+      - image: msolimans/icho
+        name: icho
+        ports:
+        - containerPort: 8888
+```
+
+Create deployment: 
+
+```shell script
+$ kubectl create -f icho.yml 
+```
+
+
+Expose deployment as a `NodePort` service: 
+
+```shell script
+$ kubectl expose deploy \
+  --name ichosvc \
+  --target-port=8888 --port=8888 \
+  --type=NodePort \
+  icho 
+```
+
+open your browser http://localhost:8888/echo 
+
+If you're using `minikube`, open it using:
+
+```shell script
+$ minikube service ichosvc 
+```
