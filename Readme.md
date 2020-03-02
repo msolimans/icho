@@ -60,7 +60,7 @@ If you want to try gRPC, open `proto` file under `icho` directory in any of the 
   
 Here's gRPC Client, https://github.com/uw-labs/bloomrpc
 
-For kuberenetes: 
+### For Kubernetes: 
 
 Create deployment resource:
 ```shell script
@@ -117,4 +117,12 @@ If you're using `minikube`, open it using:
 
 ```shell script
 $ minikube service ichosvc 
+```
+
+### docker-compose
+
+```shell script
+$ git clone https://github.com/msolimans/icho
+$ cd icho 
+$ docker-compose up 
 ```
