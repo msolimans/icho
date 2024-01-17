@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: icho
+  name: icho
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: icho
+  template:
+    metadata:
+      labels:
+        run: icho
+    spec:
+      containers:
+      - image: msolimans/icho
+        name: icho
+        resources: 
+          requests:
+            cpu: 64
+            memory: 64
+          limits: 
+            cpu: 128 
+            memory: 128 
+        ports:
+        - containerPort: 8888
